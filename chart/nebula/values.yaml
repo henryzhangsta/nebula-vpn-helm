@@ -35,12 +35,12 @@ ca:
     -----END NEBULA CERTIFICATE-----
 
 nodes:
-  - name: << hostname >>
-    public: |
-      -----BEGIN NEBULA CERTIFICATE-----
-      << PUBLIC KEY >>
-      -----END NEBULA CERTIFICATE-----
-    private: |
-      -----BEGIN NEBULA X25519 PRIVATE KEY-----
-      << PRIVATE KEY >>
-      -----END NEBULA X25519 PRIVATE KEY-----
+#  - name: << hostname >>
+#    public: |
+#      -----BEGIN NEBULA CERTIFICATE-----
+#      << PUBLIC KEY >>
+#      -----END NEBULA CERTIFICATE-----
+#    private: |
+#      -----BEGIN NEBULA X25519 PRIVATE KEY-----
+#      << PRIVATE KEY >>
+#      -----END NEBULA X25519 PRIVATE KEY-----
