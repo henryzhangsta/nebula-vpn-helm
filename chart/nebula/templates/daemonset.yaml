@@ -45,7 +45,7 @@ spec:
           projected:
             sources:
               - configMap:
-                  name: {{ $root.Release.Name }}-config
+                  name: {{ $root.Release.Name }}-{{ ternary "lighthouse" "client" (default false .lighthouse) }}-config
                   items:
                     - key: config
                       path: config.yaml

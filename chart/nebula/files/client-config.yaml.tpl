@@ -3,8 +3,10 @@ pki:
   cert: /etc/nebula/node.crt
   key: /etc/nebula/node.key
 
+{{- if .Values.staticHostMap }}
 static_host_map:
 {{ toYaml .Values.staticHostMap | indent 2 }}
+{{- end }}
 
 lighthouse:
   am_lighthouse: false
