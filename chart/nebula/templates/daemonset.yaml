@@ -1,0 +1,64 @@
+{{- $root := . -}}
+{{- range .Values.nodes }}
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ $root.Release.Name }}-{{ .name }}
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ $root.Release.Name }}-{{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $root.Release.Name }}-{{ .name }}
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        kubernetes.io/hostname: {{ .name }}
+      tolerations:
+        - operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: nebula
+          image: numkem/nebula@sha256:4a1f8a65fe40267bdd79bedc6fdee86faa46c003fb98482ca16437b9574e64a0
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          volumeMounts:
+            - mountPath: /etc/nebula
+              name: nebula
+            - mountPath: /dev
+              name: devices
+          args:
+            - "--config"
+            - "/etc/nebula/config.yaml"
+      volumes:
+        - name: devices
+          hostPath:
+            path: /dev
+        - name: nebula
+          projected:
+            sources:
+              - configMap:
+                  name: {{ $root.Release.Name }}-config
+                  items:
+                    - key: config
+                      path: config.yaml
+              - configMap:
+                  name: {{ $root.Release.Name }}-ca-crt
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+              - secret:
+                  name: {{ $root.Release.Name }}-{{ .name }}
+                  items:
+                    - key: node.crt
+                      path: node.crt
+                    - key: node.key
+                      path: node.key
+{{- end }}

@@ -1,0 +1,46 @@
+staticHostMap:
+  # 192.168.200.1: ["lighthouse.example.com:4242"]
+
+tun:
+  unsafeRoutes:
+
+# The firewall is default deny. There is no way to write a deny rule.
+# Rules are comprised of a protocol, port, and one or more of host, group, or CIDR
+# Logical evaluation is roughly: port AND proto AND (ca_sha OR ca_name) AND (host OR group OR groups OR cidr)
+# - port: Takes `0` or `any` as any, a single number `80`, a range `200-901`, or `fragment` to match second and further fragments of fragmented packets (since there is no port available).
+#   proto: `any`, `tcp`, `udp`, or `icmp`
+#   host: `any` or a literal hostname, ie `test-host`
+#   group: `any` or a literal group name, ie `default-group`
+#   groups: Same as group but accepts a list of values. Multiple values are AND'd together and a certificate would have to contain all groups to pass
+#   cidr: a CIDR, `0.0.0.0/0` is any.
+#   ca_name: An issuing CA name
+#   ca_sha: An issuing CA shasum
+firewall:
+  inbound:
+    - port: any
+      proto: tcp
+      host: any
+    - port: any
+      proto: udp
+      host: any
+  outbound:
+    - port: any
+      proto: any
+      host: any
+
+ca:
+  public: |
+    -----BEGIN NEBULA CERTIFICATE-----
+    << CERT HERE >>
+    -----END NEBULA CERTIFICATE-----
+
+nodes:
+  - name: << hostname >>
+    public: |
+      -----BEGIN NEBULA CERTIFICATE-----
+      << PUBLIC KEY >>
+      -----END NEBULA CERTIFICATE-----
+    private: |
+      -----BEGIN NEBULA X25519 PRIVATE KEY-----
+      << PRIVATE KEY >>
+      -----END NEBULA X25519 PRIVATE KEY-----
