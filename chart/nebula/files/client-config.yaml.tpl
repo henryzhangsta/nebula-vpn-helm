@@ -90,10 +90,6 @@ tun:
   routes:
   #- mtu: 8800
   #  route: 10.0.0.0/16
-{{- if .Values.tun.unsafeRoutes }}
-  unsafe_routes:
-{{ toYaml .Values.tun.unsafeRoutes | indent 4 }}
-{{- end }}
 
 logging:
   level: info
