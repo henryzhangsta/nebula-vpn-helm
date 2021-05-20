@@ -57,7 +57,7 @@ punchy:
     # respond means that a node you are trying to reach will connect back out to you if your hole punching fails
     # this is extremely useful if one node is behind a difficult nat, such as a symmetric NAT
     # Default is false
-    #respond: true
+    respond: true
 
     # delays a punch response for misbehaving NATs, default is 1 second, respond must be true to take effect
     #delay: 1s
