@@ -1,3 +1,5 @@
+values-override.yaml
+
 # IDE
 .idea/
 .vscode/
