@@ -24,7 +24,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: nebula
-          image: numkem/nebula@sha256:4a1f8a65fe40267bdd79bedc6fdee86faa46c003fb98482ca16437b9574e64a0
+          image: "{{ default "henryzhangsta/nebula" $root.Values.image }}:{{ default "latest" $root.Values.tag }}"
           securityContext:
             capabilities:
               add:

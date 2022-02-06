@@ -1,3 +1,6 @@
+image: henryzhangsta/nebula
+tag: 1.5.2
+
 staticHostMap:
   # 192.168.200.1: ["lighthouse.example.com:4242"]
 
