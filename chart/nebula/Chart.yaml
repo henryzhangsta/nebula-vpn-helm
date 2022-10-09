@@ -1,4 +1,4 @@
 apiVersion: v2
 name: nebula
-version: 0.1.0
-appVersion: 1.4.0
+version: 1.0.0
+appVersion: 1.6.1
